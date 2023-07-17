@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  
+  <head>    
+
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
+    
+    <script src="./js/move.js"></script>
+    <script src="./js/roadRotate.js"></script>
+    <script src="./js/coins.js"></script>
+    <script src="./js/game.js"></script>
+  </head>
+
+  <body>
+    
+    <a-scene id="scene" background="color:#026F90" physics>
+
+      <a-entity id="look" look-controls camera position="-3 5 4" rotation="0 180 0" drive camera-angle></a-entity>
+
+      <!--Asset Management-->
+      <a-assets timeout="10000">        
+        <a-asset-item
+          id="roadMap"
+          src="./assets/road/scene.gltf"
+        ></a-asset-item>
+
+        <a-asset-item
+          id="car"
+          src="./assets/car/scene.gltf"
+        ></a-asset-item>
+
+        
+      </a-assets>
+
+      <a-entity light="type: ambient; color: white; intensity:2.5"></a-entity>
+
+      <a-entity
+        id="road"
+        gltf-model="#roadMap"
+        position="0 -2.4 0"
+        scale="0.05 0.05 0.05"
+        rotation="-3 17 0"
+        road-rotation 
+        coins
+      >
+      </a-entity>
+
+      <a-entity
+        id="car_model"
+        gltf-model="#car"
+        position="0 2 0"
+        scale="2 2 2"
+        rotation="0 180 0"  
+        dynamic-body="mass:0" 
+        drive 
+        game-play
+      >
+      </a-entity>
+
+      <a-entity id="header" position="0 0 0" drive>
+        <!-- Title -->
+        <a-entity
+          position="-3 8 0"
+          text="font: exo2bold; align: center; width: 20; color: black; value: VIRTUAL DRIVING"
+        ></a-entity>
+
+        <!--Score-->
+        <a-entity position="7 7 0">
+          <a-entity
+            position=""
+            text="font: aileronsemibold; width: 12; color: black; value: SCORE"
+          ></a-entity>
+          <a-entity
+            id="score"
+            position="-4 0.1 0"
+            text="font: exo2bold; align: center; width: 16; color: black; value: 0"
+          ></a-entity>
+        </a-entity>
+
+    </a-scene>
+  </body>
+</html>
+
+
